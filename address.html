@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>地址</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app" class="address-page">
+        <div class="app1">
+            <h1>{{title}}</h1>
+        </div>
+        <div class="address-list">
+            <ul>
+                <li v-for='item in addressList'>
+                    <a href="javacript:">
+                        <dl>
+                            <dt>
+                                {{item.userName}}
+                            </dt>
+                            <dd>
+                                {{item.streetName}}
+                            </dd>
+                            <dd>
+                                {{item.tel}}
+                            </dd>
+                            <dd v-if="item.isDefault">
+                                <p class="c-yellow">
+                                    默认地址
+                                </p>    
+                            </dd>
+                        </dl>
+                        <div class="action">
+                            <div class="edit">
+                                <i>编辑</i>
+                            </div>
+                            <div class="edit">
+                                <i>删除</i>
+                            </div>
+                        </div>
+                    </a>
+                </li>                
+               
+                <li>
+                    <a href="javacript:" class="add-address">
+                        +
+                    </a>
+                </li>
+            </ul>
+            <div class="more">
+                <a href="JavaScript:">
+                    more ↓
+                </a>
+            </div>
+        </div>
+        
+        <div class="app1">
+            <h1>配送方式</h1>
+        </div>
+        <div class="peisong">
+            <ul>
+                <li class="active">
+                    <a href="javascript:">
+                        <p>标准配送</p>
+                        <p>free</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:">
+                        <p>高级配送</p>
+                        <p>180</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+    </div>   
+    <script src="node_modules/vue/dist/vue.min.js"></script>
+    <script src="node_modules/vue-resource/dist/vue-resource.min.js"></script>
+    <script src="js/address.js"></script> 
+</body>
+</html>

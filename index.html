@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+   <div id="app">
+    <div class="app1">
+        <h1>{{title}}</h1>
+        <div class="p-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th width="40%">
+                            商品信息
+                        </th>
+                        <th>
+                            商品金额
+                        </th>
+                        <th>
+                            商品数量
+                        </th>
+                        <th>
+                            总金额
+                        </th>
+                        <th>
+                            编辑
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for='item in productList'>
+                        <td>
+                            <div>
+                                <input type="checkbox"
+                                :checked='item.checked'
+                                @click="selectedProduct(item)">
+                                <img :src="item.productImage" alt="">
+                                <div class="inner">
+                                    <p>{{item.productName}}</p>
+                                    <dl>
+                                        <dt>
+                                            赠送：
+                                        </dt>
+                                        <dd v-for="part in item.parts">
+                                            {{part.partsName}}
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            {{item.productPrice | formatMoney}}
+                        </td>
+                        <td>
+                            <div class="p-num">
+                                <button type="button" @click="changeMone(item,-1)">-</button>
+                                <input type="number" min="0" v-model='item.productQuantity'>
+                                <button type="button" @click="changeMone(item,1)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <b class="red">
+                                {{item.productQuantity*item.productPrice | Money}}
+                            </b>
+                        </td>
+                        <td>
+                            <a href="javacript:" class="a-link" @click="delConfirm(item)">
+                                删除
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="foot">
+            <div class="left">
+                <input type="checkbox" :checked='checkFlag' @click='checkAll()'>
+                <span>全选/取消</span>    
+            </div>
+            <div class="right">
+                <span>
+                    item  total: <b class="red">{{totalMoney | formatMoney}}</b>
+                </span>
+                <a href="address.html" class="pay">
+                    结账
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="md-modal" v-bind:class="{fadeIn:delFlag}">
+        <div class="md-inner">
+            <div class="md-head">
+                <button type="button" class="close-md" @click="delFlag=false">关闭</button>
+            </div>
+            <div class="md-content">
+                <p>
+                    您确认要删除此信息么？
+                </p>
+            </div>
+            <div class="md-foot">
+                <button type="button" @click="delProduct">
+                    yes
+                </button>
+                <button type="button" class="close-md" @click="delFlag=false">
+                    no
+                </button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="node_modules/vue/dist/vue.min.js"></script>
+    <script src="node_modules/vue-resource/dist/vue-resource.min.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+
+</html>
