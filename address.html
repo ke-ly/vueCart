@@ -12,7 +12,9 @@
         </div>
         <div class="address-list">
             <ul>
-                <li v-for='item in addressList'>
+                <li v-for='(item,index) in filterAdderss' 
+                   :class='{"active":index==currentIndex}'
+                   @click='currentIndex=index'>
                     <a href="javacript:">
                         <dl>
                             <dt>
@@ -24,10 +26,13 @@
                             <dd>
                                 {{item.tel}}
                             </dd>
-                            <dd v-if="item.isDefault">
-                                <p class="c-yellow">
+                            <dd>
+                                <p class="c-yellow" v-if="item.isDefault">
                                     默认地址
-                                </p>    
+                                </p>  
+                                <p v-else class="set_default" @click="setDefault(item.addressId)">
+                                    设为默认
+                                </p>  
                             </dd>
                         </dl>
                         <div class="action">
@@ -48,7 +53,7 @@
                 </li>
             </ul>
             <div class="more">
-                <a href="JavaScript:">
+                <a href="JavaScript:" @click="showMore">
                     more ↓
                 </a>
             </div>
@@ -59,13 +64,13 @@
         </div>
         <div class="peisong">
             <ul>
-                <li class="active">
+                <li :class="{'active':shipping == 1}" @click="shipping=1">
                     <a href="javascript:">
                         <p>标准配送</p>
                         <p>free</p>
                     </a>
                 </li>
-                <li>
+                <li :class="{'active':shipping == 2}" @click="shipping=2">
                     <a href="javascript:">
                         <p>高级配送</p>
                         <p>180</p>

@@ -199,7 +199,12 @@ input[type = 'checkbox']{
     text-align: center;
     transition: all 0.25s;
 }
-.address-list li:hover .action{
+.set_default{
+    color: aqua;
+    opacity: 0; 
+    transition: all 0.25s;
+}
+.address-list li:hover .action,.address-list li:hover .set_default{
     opacity: 1;
 }
 .action div{

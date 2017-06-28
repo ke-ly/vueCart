@@ -17,7 +17,9 @@ var vm = new Vue({
         }
     },
     mounted:function(){
-        this.getList();    
+        this.$nextTick(function(){
+            this.getList();  
+        })  
     },
     methods:{
         getList(){
@@ -36,8 +38,7 @@ var vm = new Vue({
                 if(product.productQuantity < 1){
                     product.productQuantity =1;
                 }
-            }
-            
+            }            
             this.calcToalPrice();
         },
         selectedProduct(product){
@@ -45,14 +46,12 @@ var vm = new Vue({
                 this.$set(product,'checked',true);                 
             }else{
                 product.checked = !product.checked;    
-            }
-            
+            }            
             this.calcToalPrice();
         },
         checkAll(){
             var _this = this;
-            this.checkFlag = !this.checkFlag;  
-            
+            this.checkFlag = !this.checkFlag;              
             this.productList.forEach(function(item,index){
                 if(typeof item.checked == "undefined"){
                     _this.$set(item,'checked',_this.checkFlag); 
@@ -60,15 +59,13 @@ var vm = new Vue({
                 }else{
                     item.checked = _this.checkFlag;    
                 }    
-            })
-            
+            })            
             this.calcToalPrice();
         },
         calcToalPrice(){
             var _this = this;
             this.totalMoney = 0;
-            this.productList.forEach(function(item,index){
-                
+            this.productList.forEach(function(item,index){                
                 if(item.checked){
                     console.log(item.productQuantity)
                     _this.totalMoney += item.productPrice * item.productQuantity    
@@ -80,11 +77,9 @@ var vm = new Vue({
             this.curProduct = pro;
         },
         delProduct(){
-            var index = this.productList.indexOf(this.curProduct);  
-            this.productList.splice(index,1);
-            
+            var index = this.productList.indexOf(this.curProduct); 
+            this.productList.splice(index,1);            
             this.delFlag = false;
         }
-    },
-    
+    },    
 });
